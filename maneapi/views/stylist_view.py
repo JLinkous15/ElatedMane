@@ -45,7 +45,6 @@ class StylistView(ViewSet):
         serialized = StylistSerializer(stylist)
         return Response(serialized.data)
 
-
     def list(self, request):
         """Handle GET requests to stylists resource
 
@@ -60,7 +59,7 @@ class StylistView(ViewSet):
 class StylistSerializer(serializers.ModelSerializer):
     """JSON serializer for stylist creator"""
 
-
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'email', 'username',)
+        fields = ('id', 'first_name', 'last_name',
+                  'email', 'username', 'clientele',)

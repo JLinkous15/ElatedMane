@@ -26,6 +26,9 @@ class StyleView(ViewSet):
             Response -- JSON serialized list of styles
         """
         styles = HairStyle.objects.all()
+        for style in styles:
+            clients = style.customers.count()
+            style.total_clients = clients
         serialized = StyleSerializer(styles, many=True)
         return Response(serialized.data)
 
@@ -36,4 +39,4 @@ class StyleSerializer(serializers.ModelSerializer):
     class Meta:
         """JSON serializer for style creator"""
         model = HairStyle
-        fields = ( 'id', 'label', 'clients')
+        fields = ('id', 'label', 'customers', 'total_clients')
